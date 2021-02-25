@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package greet;
+
+message Number{
+int32 x = 1;
+}
+message RequestNum{
+  int32 x = 1;
+}
+
+message ResponseNum{
+  int32 y = 1;
+}
+
+service CalculatorService{
+  rpc Calculate(RequestNum) returns (stream ResponseNum){};
+}
