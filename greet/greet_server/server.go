@@ -9,17 +9,17 @@ import (
 )
 
 type Server struct {
-	greetpb.UnimplementedGreetServiceServer
+	greetpb.UnimplementedCalculatorServiceServer
 }
 
 func (s *Server) Calculate(req *greetpb.RequestNum,
-	stream greetpb.CalculatorService_PrimeNumberDecompositionServer) error {
+	stream greetpb.CalculatorService_CalculateServer) error {
 	fmt.Printf("Calculate function was invoked with %v \n", req)
-	number := req.GetNumber()
+	number := req.GetX()
 	for number > 1 {
 		num := getFirstPrime(number)
 		number /= num
-		res := &greetpb.PrimeNumberDecompositionResponse{Number: num}
+		res := &greetpb.ResponseNum{Y: num}
 		if err := stream.Send(res); err != nil {
 			log.Fatalf("error while sending greet many times responses: %v", err.Error())
 		}

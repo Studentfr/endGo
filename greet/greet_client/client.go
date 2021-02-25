@@ -24,7 +24,7 @@ func main() {
 }
 func doManyTimesFromServer(c greetpb.GreetServiceClient) {
 	ctx := context.Background()
-	req := &greetpb.RequestNum{Number: 120}
+	req := &greetpb.RequestNum{X: 120}
 
 	stream, err := c.Calculate(ctx, req)
 	if err != nil {
@@ -42,7 +42,7 @@ LOOP:
 			}
 			log.Fatalf("error while reciving from calculate RPC %v", err)
 		}
-		log.Printf("response from calculate:%v \n", res.GetNumber())
+		log.Printf("response from calculate:%v \n", res.GetY())
 	}
 
 }
